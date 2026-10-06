@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospitals</title>
+</head>
+<body align="center" style="background-color:black; color:white; overflow:auto;">
+
+<h2>Hospitals in {{district}}</h2>
+
+{% for rs in data %}
+<p>
+{{loop.index}}. {{rs[1]}}<br>
+{{rs[2]}}<br>
+{{rs[3]}}
+</p>
+<hr>
+{% endfor %}
+
+</body>
+</html>

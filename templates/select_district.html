@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select District</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 400px;
+            margin: 150px auto;
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        select, button {
+            width: 80%;
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            background-color: #ff9933;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e68a00;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Select Your District</h2>
+
+    <form action="/view_hospitals" method="post">
+        <select name="district" required>
+            <option value="">-- Select District --</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Coimbatore">Coimbatore</option>
+            <option value="Madurai">Madurai</option>
+            <option value="Trichy">Trichy</option>
+            <option value="Salem">Salem</option>
+        </select>
+
+        <button type="submit">Show Hospitals</button>
+    </form>
+</div>
+
+</body>
+</html>

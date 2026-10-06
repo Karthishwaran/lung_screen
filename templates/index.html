@@ -1,0 +1,272 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Oncology Diagnostics Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* BODY - balanced light/dark feel */
+body {
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e4f5 100%);
+    color: #222;
+}
+
+/* HEADER - dark with soft transparency */
+header {
+    background: rgba(20,20,30,0.85);
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+header h2 {
+    color: #00c6ff;
+    font-weight: 600;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #f0f0f0;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #00c6ff;
+}
+
+/* HERO SECTION */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 50px;
+    background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),
+                url('../static/img/medical-bg.jpg') center/cover no-repeat;
+    backdrop-filter: blur(2px);
+}
+
+/* LEFT CONTENT */
+.hero-text {
+    width: 50%;
+}
+
+.hero-text h1 {
+    font-size: 42px;
+    color: #0072ff;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* LOGIN CARD */
+.login-box {
+    background: rgba(255,255,255,0.85);
+    padding: 30px;
+    border-radius: 15px;
+    width: 320px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+.login-box h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #0072ff;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg,#00c6ff,#0072ff);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-box button:hover {
+    opacity: 0.9;
+}
+
+/* FEATURES */
+.features {
+    padding: 80px 50px;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff, #e0f0ff);
+}
+
+.features h2 {
+    color: #0072ff;
+    margin-bottom: 40px;
+    font-size: 32px;
+}
+
+.feature-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature {
+    width: 250px;
+    margin: 20px;
+    padding: 25px;
+    background: #f9fbff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-8px);
+}
+
+.feature i {
+    font-size: 42px;
+    margin-bottom: 15px;
+    color: #00c6ff;
+}
+
+.feature h3 {
+    margin-bottom: 10px;
+    color: #0072ff;
+}
+
+/* FOOTER */
+footer {
+    background: #1a1a1a;
+    padding: 25px;
+    text-align: center;
+    color: #ccc;
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .feature-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <h2>Oncology Tool</h2>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/login_user">User</a>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+
+    <!-- LEFT TEXT -->
+    <div class="hero-text">
+        <h1>Lung Cancer Detection </h1>
+         <!-- & Staging -->
+        <p>
+            Oncology Diagnostics Tool using U-Net segmentation 
+            and Vision Transformer for accurate lung cancer detection  from CT scan images.
+            <!-- and staging  -->
+        </p>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="login-box">
+        <h3>Admin Login</h3>
+        <form method="post" action="/">
+            <input type="text" name="uname" placeholder="Username" required>
+            <input type="password" name="pass" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div style="color:#ff9800; text-align:center;">{{msg}}</div>
+    </div>
+
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features">
+    <h2>System Features</h2>
+    <div class="feature-grid">
+
+        <div class="feature">
+            <i class="fas fa-brain"></i>
+            <h3>Lung Cancer Detection</h3>
+            <p>Deep learning models for accurate lung disease detection.</p>
+        </div>
+
+        <div class="feature">
+            <i class="fas fa-x-ray"></i>
+            <h3>CT Scan Analysis</h3>
+            <p>Processes CT images for precise tumor identification.</p>
+        </div>
+
+        <div class="feature">
+            <i class="fas fa-chart-line"></i>
+            <h3>ViT</h3>
+            <p>Automatic cancer stage classification system.</p>
+        </div>
+
+        <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Secure System</h3>
+            <p>Protected login and patient data handling.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    Oncology Diagnostics Tool | Deep Learning Based Lung Cancer Detection System
+</footer>
+
+</body>
+</html>

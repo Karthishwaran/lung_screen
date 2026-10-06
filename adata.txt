@@ -1,0 +1,11 @@
+a (9).jpg
+
+train/
+   normal/      → 2560
+   benign/      → 2400
+   malignant/   → 2270
+
+test/
+   normal/      → 640
+   benign/      → 600
+   malignant/   → 567

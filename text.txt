@@ -1,0 +1,97 @@
+OPTION 1: If using U-Net (TensorFlow)
+
+model = unet_model()
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+history = model.fit(
+    X_train,
+    Y_train,
+    validation_split=0.2,
+    epochs=10,   # 🔥 HERE
+    batch_size=16
+)
+
+
+OPTION 2: If using ViT (PyTorch)
+epochs = 10
+
+for epoch in range(epochs):
+    model.train()
+
+    for images, labels in train_loader:
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+    print(f"Epoch {epoch+1}, Loss: {loss.item()}")
+
+
+def evaluate_model():
+    y_true = []
+    y_pred = []
+    y_pred_proba = []
+
+    test_path = "dataset/test"   # your test folder
+
+    for class_index, class_name in enumerate(classes):
+        class_folder = os.path.join(test_path, class_name)
+
+        for file in os.listdir(class_folder):
+            img_path = os.path.join(class_folder, file)
+
+            img = cv2.imread(img_path)
+            img = transform(img)
+            img = img.unsqueeze(0)
+
+            with torch.no_grad():
+                output = model(img)
+                probs = torch.softmax(output, dim=1)
+                pred = torch.argmax(output, dim=1)
+
+            y_true.append(class_index)
+            y_pred.append(pred.item())
+            y_pred_proba.append(probs.numpy()[0])
+
+    # ---- METRICS ----
+    accuracy = accuracy_score(y_true, y_pred)
+    precision = precision_score(y_true, y_pred, average='weighted')
+    recall = recall_score(y_true, y_pred, average='weighted')
+
+    cm = confusion_matrix(y_true, y_pred)
+
+    TN = cm.sum() - (cm.sum(axis=1) + cm.sum(axis=0) - np.diag(cm))
+    FP = cm.sum(axis=0) - np.diag(cm)
+    specificity = np.mean(TN / (TN + FP))
+
+    logloss = log_loss(y_true, y_pred_proba)
+
+    print("Accuracy:", accuracy)
+    print("Precision:", precision)
+    print("Recall:", recall)
+    print("Specificity:", specificity)
+    print("Log Loss:", logloss)
+
+    return accuracy, precision, recall, specificity, logloss
+
+
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Confusion matrix
+cm = confusion_matrix(y_true, y_pred)
+
+plt.figure(figsize=(6,5))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=classes,
+            yticklabels=classes)
+
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.title("Confusion Matrix")
+
+plt.savefig("static/trained/confusion_matrix.png")
+plt.close()
